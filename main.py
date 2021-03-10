@@ -16,6 +16,9 @@ class Student:
                f'\nКурсы в процессе изучения: {join(self.courses_in_progress)}' \
                f'\nЗавершенные курсы:{join(self.finished_courses)}'
 
+    def __lt__(self, other):
+        return self.avg < other.avg
+
     def add_grade_lecturer(self, lecturer, course, grade):
         if isinstance(lecturer,
                       Lecturer) and course in self.courses_in_progress and course in lecturer.courses_attached:
@@ -64,6 +67,9 @@ class Lecturer(Mentor):
 
     def __str__(self):
         return f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за лекции: {self.avg}'
+
+    def __lt__(self, other):
+        return self.avg < other.avg
 
 
 def averagegrade(grades):
@@ -132,3 +138,6 @@ print(second_student)
 print(bad_lecturer)
 print(avg_grade_subj(students, 'PHP'))
 print(avg_grade_subj(lecturers, 'Python'))
+print(second_student.avg)
+print(bad_lecturer.avg)
+print(second_student < bad_lecturer)
